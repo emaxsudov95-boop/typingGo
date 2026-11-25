@@ -98,6 +98,16 @@ Avtomatik testlar (`server/test/`):
 - natija saqlanishi, takroriy yuborish rad etilishi, profil va tegishli reytingda ko‘rinishi;
 - “O‘z matnim” natijasi faqat shaxsiy tarixga tushishi; o‘/g‘ apostrof variantlarining tengligi; WPM va aniqlik hisobi.
 
+## Internetga joylash (bepul — Hugging Face Spaces)
+
+1. https://huggingface.co/new-space — SDK: **Docker → Blank**, Hardware: **CPU basic (free)**.
+2. Space'ga `deploy/huggingface/` papkasidagi `README.md` va `Dockerfile` ni qo‘shing (Files → Add file).
+3. Space → **Settings → Variables and secrets** → *New secret*: `MONGODB_URI` va `JWT_SECRET`.
+4. Atlas → Network Access: `0.0.0.0/0`.
+
+Dockerfile kodni shu GitHub repo'dan oladi; yangilash uchun Space → Settings → **Factory rebuild**.
+Muqobil: `render.yaml` orqali Render.com (Blueprint).
+
 ## Qanday ishlaydi
 
 - **Yakka test** birinchi harf bosilganda boshlanadi. `Tab` — yangi test. Backspace bilan xatoni tuzatish mumkin (oldingi so‘zga faqat u xato bo‘lsa qaytiladi).
