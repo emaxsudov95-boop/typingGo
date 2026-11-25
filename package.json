@@ -1,0 +1,20 @@
+{
+  "name": "typinggo",
+  "private": true,
+  "type": "module",
+  "description": "TypingGo — tez yozish platformasi (frontend + backend)",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "postinstall": "npm --prefix server install && npm --prefix client install",
+    "dev": "concurrently -k -n server,client -c yellow,cyan \"npm --prefix server run dev\" \"npm --prefix client run dev\"",
+    "dev:memory": "concurrently -k -n server,client -c yellow,cyan \"npm --prefix server run dev:memory\" \"npm --prefix client run dev\"",
+    "build": "npm --prefix client run build",
+    "start": "npm --prefix server start",
+    "test": "npm --prefix server test"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.7"
+  }
+}

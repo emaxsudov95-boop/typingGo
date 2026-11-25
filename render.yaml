@@ -1,0 +1,18 @@
+# Render.com uchun sozlama: bitta Node servisi ham API, ham Socket.IO, ham tayyor frontendni beradi.
+services:
+  - type: web
+    name: typinggo
+    runtime: node
+    plan: free
+    buildCommand: npm --prefix server install --omit=dev && npm --prefix client install --include=dev && npm --prefix client run build
+    startCommand: node server/src/index.js
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_VERSION
+        value: 22
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CLIENT_ORIGIN
+        sync: false

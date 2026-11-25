@@ -1,0 +1,175 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-bg: #2c2e31;
+  --color-panel: #26282b;
+  --color-sub: #6b6e73;
+  --color-text: #e8e6dc;
+  --color-main: #f2c230;
+  --color-err: #e05561;
+  --color-err-dim: #8a3a41;
+  --font-mono: 'JetBrains Mono', 'Roboto Mono', ui-monospace, Consolas, monospace;
+}
+
+html,
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-mono);
+  min-height: 100%;
+}
+
+::selection {
+  background: var(--color-main);
+  color: var(--color-bg);
+}
+
+/* ---------- Yozish maydoni ---------- */
+.tt {
+  position: relative;
+  outline: none;
+}
+.tt-box {
+  --line: 2.6rem;
+  position: relative;
+  height: calc(var(--line) * 3);
+  overflow: hidden;
+  font-size: 1.75rem;
+  line-height: var(--line);
+  cursor: text;
+  user-select: none;
+}
+@media (max-width: 640px) {
+  .tt-box {
+    --line: 2rem;
+    font-size: 1.25rem;
+  }
+}
+.tt-words {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  transition: transform 160ms ease-out;
+  will-change: transform;
+}
+.tt-word {
+  margin-right: 0.6em;
+  height: var(--line);
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+}
+.tt-word.err {
+  border-bottom-color: var(--color-err-dim);
+}
+.tt-l {
+  color: var(--color-sub);
+}
+.tt-l.ok {
+  color: var(--color-text);
+}
+.tt-l.bad {
+  color: var(--color-err);
+}
+.tt-l.extra {
+  color: var(--color-err-dim);
+}
+.tt-caret {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 3px;
+  height: calc(var(--line) * 0.72);
+  margin-top: calc(var(--line) * 0.14);
+  border-radius: 2px;
+  background: var(--color-main);
+  transition:
+    left 90ms linear,
+    top 90ms linear;
+  pointer-events: none;
+}
+.tt-caret.blink {
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+.tt-input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  font-size: 16px; /* iOS avtomatik kattalashtirmasin */
+  z-index: 2;
+  cursor: text;
+  caret-color: transparent;
+  color: transparent;
+  background: transparent;
+  border: 0;
+  resize: none;
+}
+.tt-blur {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text);
+  font-size: 1rem;
+  backdrop-filter: blur(4px);
+  background: color-mix(in srgb, var(--color-bg) 40%, transparent);
+  pointer-events: none;
+  z-index: 1;
+}
+.tt.focused .tt-blur,
+.tt.locked .tt-blur {
+  display: none;
+}
+
+/* ---------- Umumiy elementlar ---------- */
+.chip {
+  @apply rounded px-2 py-1 text-sm text-sub transition-colors hover:text-text;
+}
+.chip.on {
+  @apply text-main;
+}
+.btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-lg bg-panel px-4 py-2 text-sm text-text transition-colors hover:bg-main hover:text-bg disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-panel disabled:hover:text-text;
+}
+.btn-main {
+  @apply bg-main text-bg hover:brightness-110 hover:bg-main;
+}
+.field {
+  @apply w-full rounded-lg border border-transparent bg-panel px-3 py-2 text-text outline-none placeholder:text-sub focus:border-main;
+}
+.card {
+  @apply rounded-xl bg-panel p-4;
+}
+.label {
+  @apply text-xs text-sub;
+}
+.nav-link {
+  @apply rounded px-2 py-1 text-sub transition-colors hover:text-text;
+}
+.nav-link.active {
+  @apply text-main;
+}
+.tbl {
+  @apply w-full text-left text-sm;
+}
+.tbl th {
+  @apply px-3 py-2 font-normal text-sub;
+}
+.tbl td {
+  @apply px-3 py-2;
+}
+.tbl tbody tr:nth-child(odd) {
+  @apply bg-panel;
+}
+.countdown {
+  @apply pointer-events-none absolute inset-0 z-10 flex items-center justify-center text-7xl font-bold text-main;
+}
